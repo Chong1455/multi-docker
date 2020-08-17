@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t cks/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t chongks/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true cks/react-test npm test
+  - docker run -e CI=true chongks/react-test npm test
 
 after_success:
-  - docker build -t cks/multi-client ./client
-  - docker build -t cks/multi-nginx ./nginx
-  - docker build -t cks/multi-server ./server
-  - docker build -t cks/multi-worker ./worker
+  - docker build -t chongks/multi-client ./client
+  - docker build -t chongks/multi-nginx ./nginx
+  - docker build -t chongks/multi-server ./server
+  - docker build -t chongks/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push cks/multi-client
-  - docker push cks/multi-nginx
-  - docker push cks/multi-server
-  - docker push cks/multi-worker
+  - docker push chongks/multi-client
+  - docker push chongks/multi-nginx
+  - docker push chongks/multi-server
+  - docker push chongks/multi-worker
